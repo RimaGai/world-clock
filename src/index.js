@@ -1,30 +1,56 @@
 function updateTime() {
   let parisDate = document.querySelector("#paris .date");
   let parisTime = document.querySelector("#paris .time");
+  let parisDiv = document.querySelector("#paris");
   let parisNow = moment().tz("Europe/Paris");
+  applyDayNight(parisDiv, parisNow);
   parisDate.innerHTML = parisNow.format("dddd, MMMM D, YYYY");
   parisTime.innerHTML = parisNow.format("HH:mm:ss A");
 
   let sydneyDate = document.querySelector("#sydney .date");
   let sydneyTime = document.querySelector("#sydney .time");
+  let sydneyDiv = document.querySelector("#sydney");
   let sydneyNow = moment().tz("Australia/Sydney");
+  applyDayNight(sydneyDiv, sydneyNow);
   sydneyDate.innerHTML = sydneyNow.format("dddd, MMMM D, YYYY");
   sydneyTime.innerHTML = sydneyNow.format("HH:mm:ss A");
 
   let tokyoDate = document.querySelector("#tokyo .date");
   let tokyoTime = document.querySelector("#tokyo .time");
+  let tokyoDiv = document.querySelector("#tokyo");
   let tokyoNow = moment().tz("Asia/Tokyo");
+  applyDayNight(tokyoDiv, tokyoNow);
   tokyoDate.innerHTML = tokyoNow.format("dddd, MMMM D, YYYY");
   tokyoTime.innerHTML = tokyoNow.format("HH:mm:ss A");
 
   let selectedCityDiv = document.querySelector("#selectedCity .city");
-  if (selectedCityDiv && selectedCityDiv.dataset.tz) {
+  let selectedCityValue = document.querySelector("#city").value;
+
+  if (selectedCityDiv && selectedCityValue) {
     let cityTimeZone = selectedCityDiv.dataset.tz;
     let cityTime = moment().tz(cityTimeZone);
+    applyDayNight(selectedCityDiv, cityTime);
     selectedCityDiv.querySelector(".date").innerHTML = cityTime.format("dddd, MMMM Do YYYY");
     selectedCityDiv.querySelector(".time").innerHTML = `${cityTime.format("HH:mm:ss")} <small>${cityTime.format(
       "A"
     )}</small>`;
+  }
+
+  function applyDayNight(cityDiv, cityMoment) {
+    if (!cityDiv.querySelector("h2")) return;
+    let hour = cityMoment.hour();
+
+    cityDiv.classList.remove("sunrise", "day", "sunset", "night");
+
+    if (hour >= 6 && hour < 9) {
+      cityDiv.classList.add("sunrise");
+    } else if (hour >= 9 && hour < 18) {
+      cityDiv.classList.add("day");
+    } else if (hour >= 18 && hour < 21) {
+      cityDiv.classList.add("sunset");
+    } else {
+      cityDiv.classList.add("night");
+    }
   }
 }
 

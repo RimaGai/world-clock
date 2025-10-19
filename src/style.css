@@ -5,3 +5,122 @@ a {
 h1 a:visited {
   color: black;
 }
+
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+  color: #333;
+  margin: 0;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#city {
+  padding: 8px 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.city {
+  border-radius: 12px;
+  padding: 20px 25px;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  cursor: default;
+}
+
+.city:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+footer {
+  margin-top: 50px;
+  font-size: 0.9rem;
+  color: #1c1b1b;
+}
+
+#current {
+  display: none;
+}
+
+.city h2 {
+  margin: 0 0 10px;
+  font-size: 1.5rem;
+}
+
+.city .date {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+.city .time {
+  font-size: 1.5rem;
+}
+
+/* Sunrise */
+.city.sunrise {
+  background: linear-gradient(135deg, #ffecd2 0%, #ffd1a4 50%, #ffb386 100%);
+}
+
+.city.sunrise h2,
+.city.sunrise .date,
+.city.sunrise .time {
+  color: #3a2f1c;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Day */
+.city.day {
+  background: linear-gradient(135deg, #fffefc 0%, #e3e7eb 50%, #d0d7dd 100%);
+  color: #333;
+}
+
+/* Sunset */
+.city.sunset {
+  background: linear-gradient(135deg, #ff9a8b 0%, #ff6a88 50%, #ff99ac 100%);
+}
+
+.city.sunset h2,
+.city.sunset .date,
+.city.sunset .time {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Night */
+.city.night {
+  background: linear-gradient(135deg, #2b3a4a 0%, #3b4c63 50%, #1a2636 100%);
+  color: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1), 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.city.night h2,
+.city.night .date,
+.city.night .time {
+  color: #f5f5f5;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Smooth transitions */
+.city.day,
+.city.night,
+.city.sunrise,
+.city.sunset {
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#selectedCity {
+  max-width: 500px;
+  margin: 0 auto 15px;
+}
