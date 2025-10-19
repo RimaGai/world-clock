@@ -18,23 +18,42 @@ function updateTime() {
   tokyoTime.innerHTML = tokyoNow.format("HH:mm:ss A");
 }
 
-let citySelect = document.getElementById("city-select");
-let cities = document.querySelectorAll(".city");
+function updateCity(event) {
+  let cityTimeZone = event.target.value;
 
-citySelect.addEventListener("change", function (event) {
-  let selectedCity = event.target.value;
+  let selectedCityElement = document.querySelector("#selectedCity");
+  let citiesList = document.querySelector("#cities");
 
-  cities.forEach((city) => {
-    if (!selectedCity) {
-      city.style.display = "block";
-    } else if (city.id === selectedCity) {
-      city.style.display = "block";
-    } else {
-      city.style.display = "none";
-    }
-  });
-});
+  // If no city is selected, show all cities
+  if (!cityTimeZone) {
+    citiesList.style.display = "block";
+    selectedCityElement.style.display = "none";
+    return;
+  }
+
+  // If "current" is selected, guess the user's timezone
+  if (cityTimeZone === "current") {
+    cityTimeZone = moment.tz.guess();
+  }
+  let cityTime = moment().tz(cityTimeZone);
+  let cityName = cityTimeZone.replace("_", " ").split("/")[1];
+
+  document.querySelector("#cities").style.display = "none";
+  selectedCityElement.style.display = "block";
+
+  selectedCityElement.innerHTML = `
+    <div class="city">
+      <div>
+        <h2>${cityName}</h2>
+        <div class="date">${cityTime.format("dddd, MMMM Do YYYY")}</div>
+      </div>
+      <div class="time">${cityTime.format("HH:mm:ss")} <small>${cityTime.format("A")}</small></div>
+    </div>
+  `;
+}
+
+let citiesSelectElement = document.querySelector("#city");
+citiesSelectElement.addEventListener("change", updateCity);
 
 updateTime();
-
 setInterval(updateTime, 1000);
