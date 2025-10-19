@@ -7,21 +7,21 @@ function updateTime() {
   parisDate.innerHTML = parisNow.format("dddd, MMMM D, YYYY");
   parisTime.innerHTML = parisNow.format("HH:mm:ss A");
 
-  let sydneyDate = document.querySelector("#sydney .date");
-  let sydneyTime = document.querySelector("#sydney .time");
-  let sydneyDiv = document.querySelector("#sydney");
-  let sydneyNow = moment().tz("Australia/Sydney");
-  applyDayNight(sydneyDiv, sydneyNow);
-  sydneyDate.innerHTML = sydneyNow.format("dddd, MMMM D, YYYY");
-  sydneyTime.innerHTML = sydneyNow.format("HH:mm:ss A");
+  let losangelesDate = document.querySelector("#losangeles .date");
+  let losangelesTime = document.querySelector("#losangeles .time");
+  let losangelesDiv = document.querySelector("#losangeles");
+  let losangelesNow = moment().tz("America/Los_Angeles");
+  applyDayNight(losangelesDiv, losangelesNow);
+  losangelesDate.innerHTML = losangelesNow.format("dddd, MMMM D, YYYY");
+  losangelesTime.innerHTML = losangelesNow.format("HH:mm:ss A");
 
-  let tokyoDate = document.querySelector("#tokyo .date");
-  let tokyoTime = document.querySelector("#tokyo .time");
-  let tokyoDiv = document.querySelector("#tokyo");
-  let tokyoNow = moment().tz("Asia/Tokyo");
-  applyDayNight(tokyoDiv, tokyoNow);
-  tokyoDate.innerHTML = tokyoNow.format("dddd, MMMM D, YYYY");
-  tokyoTime.innerHTML = tokyoNow.format("HH:mm:ss A");
+  let honoluluDate = document.querySelector("#honolulu .date");
+  let honoluluTime = document.querySelector("#honolulu .time");
+  let honoluluDiv = document.querySelector("#honolulu");
+  let honoluluNow = moment().tz("Pacific/Honolulu");
+  applyDayNight(honoluluDiv, honoluluNow);
+  honoluluDate.innerHTML = honoluluNow.format("dddd, MMMM D, YYYY");
+  honoluluTime.innerHTML = honoluluNow.format("HH:mm:ss A");
 
   let selectedCityDiv = document.querySelector("#selectedCity .city");
   let selectedCityValue = document.querySelector("#city").value;
@@ -86,6 +86,9 @@ function updateCity(event) {
     <div class="time">${cityTime.format("HH:mm:ss")} <small>${cityTime.format("A")}</small></div>
   </div>
 `;
+
+  let newCityDiv = selectedCityElement.querySelector(".city");
+  applyDayNight(newCityDiv, cityTime);
 }
 
 let citiesSelectElement = document.querySelector("#city");
