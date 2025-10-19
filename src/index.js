@@ -16,6 +16,16 @@ function updateTime() {
   let tokyoNow = moment().tz("Asia/Tokyo");
   tokyoDate.innerHTML = tokyoNow.format("dddd, MMMM D, YYYY");
   tokyoTime.innerHTML = tokyoNow.format("HH:mm:ss A");
+
+  let selectedCityDiv = document.querySelector("#selectedCity .city");
+  if (selectedCityDiv && selectedCityDiv.dataset.tz) {
+    let cityTimeZone = selectedCityDiv.dataset.tz;
+    let cityTime = moment().tz(cityTimeZone);
+    selectedCityDiv.querySelector(".date").innerHTML = cityTime.format("dddd, MMMM Do YYYY");
+    selectedCityDiv.querySelector(".time").innerHTML = `${cityTime.format("HH:mm:ss")} <small>${cityTime.format(
+      "A"
+    )}</small>`;
+  }
 }
 
 function updateCity(event) {
@@ -42,14 +52,14 @@ function updateCity(event) {
   selectedCityElement.style.display = "block";
 
   selectedCityElement.innerHTML = `
-    <div class="city">
-      <div>
-        <h2>${cityName}</h2>
-        <div class="date">${cityTime.format("dddd, MMMM Do YYYY")}</div>
-      </div>
-      <div class="time">${cityTime.format("HH:mm:ss")} <small>${cityTime.format("A")}</small></div>
+  <div class="city" data-tz="${cityTimeZone}">
+    <div>
+      <h2>${cityName}</h2>
+      <div class="date">${cityTime.format("dddd, MMMM Do YYYY")}</div>
     </div>
-  `;
+    <div class="time">${cityTime.format("HH:mm:ss")} <small>${cityTime.format("A")}</small></div>
+  </div>
+`;
 }
 
 let citiesSelectElement = document.querySelector("#city");
