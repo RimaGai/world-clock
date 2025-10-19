@@ -18,6 +18,23 @@ function updateTime() {
   tokyoTime.innerHTML = tokyoNow.format("HH:mm:ss A");
 }
 
+let citySelect = document.getElementById("city-select");
+let cities = document.querySelectorAll(".city");
+
+citySelect.addEventListener("change", function (event) {
+  let selectedCity = event.target.value;
+
+  cities.forEach((city) => {
+    if (!selectedCity) {
+      city.style.display = "block";
+    } else if (city.id === selectedCity) {
+      city.style.display = "block";
+    } else {
+      city.style.display = "none";
+    }
+  });
+});
+
 updateTime();
 
 setInterval(updateTime, 1000);
