@@ -35,22 +35,22 @@ function updateTime() {
       "A"
     )}</small>`;
   }
+}
 
-  function applyDayNight(cityDiv, cityMoment) {
-    if (!cityDiv.querySelector("h2")) return;
-    let hour = cityMoment.hour();
+function applyDayNight(cityDiv, cityMoment) {
+  if (!cityDiv.querySelector("h2")) return;
+  let hour = cityMoment.hour();
 
-    cityDiv.classList.remove("sunrise", "day", "sunset", "night");
+  cityDiv.classList.remove("sunrise", "day", "sunset", "night");
 
-    if (hour >= 6 && hour < 9) {
-      cityDiv.classList.add("sunrise");
-    } else if (hour >= 9 && hour < 18) {
-      cityDiv.classList.add("day");
-    } else if (hour >= 18 && hour < 21) {
-      cityDiv.classList.add("sunset");
-    } else {
-      cityDiv.classList.add("night");
-    }
+  if (hour >= 6 && hour < 9) {
+    cityDiv.classList.add("sunrise");
+  } else if (hour >= 9 && hour < 18) {
+    cityDiv.classList.add("day");
+  } else if (hour >= 18 && hour < 21) {
+    cityDiv.classList.add("sunset");
+  } else {
+    cityDiv.classList.add("night");
   }
 }
 
